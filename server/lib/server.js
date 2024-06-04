@@ -16,4 +16,3 @@ connect()
     .catch((e) => {
         logger.error(e);
     });
-
