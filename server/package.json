@@ -1,0 +1,31 @@
+{
+  "name": "gencs-server",
+  "version": "0.0.1",
+  "description": "Express Server for GenCS",
+  "main": "lib/server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "env NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" LOG_LEVEL=silent npx jest .",
+    "watch": "nodemon -i sessions .",
+    "start": "node lib/server.js",
+    "start-db": "mongod --dbpath ../database/"
+  },
+  "author": "Craftidore and jwaddell10",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.3.3",
+    "morgan": "^1.10.0",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.2",
+    "supertest": "^7.0.0"
+  }
+}

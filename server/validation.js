@@ -1,7 +1,7 @@
-const maxSizeRatio = 100;
+const maxSizeRatio = 101;
 const minSizeRatio = 1;
 
-function validateDirection(direction) {
+export function validateDirection(direction) {
 	if (
 		typeof direction === "string" &&
 		(direction === "horizontal" || direction === "vertical")
@@ -12,10 +12,11 @@ function validateDirection(direction) {
 	}
 }
 
-function validateSizeRatio(sizeRatio) {
+export function validateSizeRatio(sizeRatio) {
 	if (
 		typeof sizeRatio === "number" &&
-		maxSizeRatio >= sizeRatio >= minSizeRatio
+		maxSizeRatio >= sizeRatio &&
+		sizeRatio >= minSizeRatio
 	) {
 		return true;
 	} else {
@@ -23,13 +24,13 @@ function validateSizeRatio(sizeRatio) {
 	}
 }
 
-function validateTextDecoration(decoration) {
+export function validateTextDecoration(decoration) {
 	if (
 		typeof decoration === "string" &&
-		(decoration === "bold" ||
-			decoration === "italic" ||
-			decoration === "underline" ||
-			decoration === "none")
+		(decoration.toLowerCase() === "bold" ||
+			decoration.toLowerCase() === "italic" ||
+			decoration.toLowerCase() === "underline" ||
+			decoration.toLowerCase() === "none")
 	) {
 		return true;
 	} else {
@@ -37,21 +38,22 @@ function validateTextDecoration(decoration) {
 	}
 }
 
-function validateFontSize(fontSize) {
+export function validateFontSize(fontSize) {
 	if (typeof fontSize === "string") {
 		switch (fontSize.toLowerCase()) {
 			case "big":
 			case "medium":
 			case "small":
 				return true;
+			default:
+				return Boolean(fontSize.match(/^\d+px$/));
 		}
-		// return Boolean(/^\d+px$/.match(fontSize))
 	} else {
 		return false;
 	}
 }
 
-function validateContainer(container) {
+export function validateContainer(container) {
 	if (container.type !== "container") {
 		return;
 	}
@@ -61,23 +63,10 @@ function validateContainer(container) {
 	const isTextDecorationValid = validateTextDecoration(container.decoration);
 	const isFontSizeValid = validateFontSize(container.fontSize);
 
-	if (
-		!isDirectionValid ||
-		!isSizeRatioValid ||
-		!isTextDecorationValid ||
-		!isFontSizeValid
-	) {
-		return false;
-	}
-	return true;
+	return (
+		isDirectionValid &&
+		isSizeRatioValid &&
+		isTextDecorationValid &&
+		isFontSizeValid
+	);
 }
-
-const newContainer = {
-	type: "container",
-	direction: "horizontal",
-	sizeRatio: 42,
-	decoration: "none",
-	fontSize: "big",
-};
-
-console.log(validateContainer(newContainer), "this is new container");
