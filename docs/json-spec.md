@@ -11,7 +11,7 @@ Everything has an id
 {
     "type":"container",
     "direction":String, // "vertical" or "horizontal"
-    "size_ratio":Number,
+    "size_ratio":Number, // not-negative
     "id":String // some hex uuid
 }
 ```
