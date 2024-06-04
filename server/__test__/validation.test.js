@@ -1,4 +1,5 @@
 // import config from '../lib/config.js';
+import assert from 'assert';
 import {
     validateDirection,
     validateSizeRatio,
@@ -9,52 +10,52 @@ import {
 
 describe('validation.js helper functions, clean tests', () => {
     it('direction clean', () => {
-        expect(validateDirection('horizontal')).toStrictEqual(true);
-        expect(validateDirection('vertical')).toStrictEqual(true);
-        expect(validateDirection('')).toStrictEqual(false);
-        expect(validateDirection('lfldf kjasd')).toStrictEqual(false);
+        assert.strictEqual(validateDirection('horizontal'), true, 'horizontal');
+        assert.strictEqual(validateDirection('vertical'), true, 'vertical');
+        assert.strictEqual(validateDirection(''), false, "''");
+        assert.strictEqual(validateDirection('lfldf kjasd'), false, 'lfldf kjasd');
     });
 
     it('sizeRatio clean', () => {
-        expect(validateSizeRatio(5)).toStrictEqual(true);
-        expect(validateSizeRatio(28)).toStrictEqual(true);
-        expect(validateSizeRatio(123921038)).toStrictEqual(false);
-        expect(validateSizeRatio(-3)).toStrictEqual(false);
-        expect(validateSizeRatio(0)).toStrictEqual(false);
+        assert.strictEqual(validateSizeRatio(5), true, "5");
+        assert.strictEqual(validateSizeRatio(28), true, "28");
+        assert.strictEqual(validateSizeRatio(123921038), false, "123921038");
+        assert.strictEqual(validateSizeRatio(-3), false, "-3");
+        assert.strictEqual(validateSizeRatio(0), false, "0");
     });
     
     it('sizeRatio edge testing clean', () => {
-        expect(validateSizeRatio(0)).toStrictEqual(false);
-        expect(validateSizeRatio(1)).toStrictEqual(true);
-        expect(validateSizeRatio(2)).toStrictEqual(true);
-        expect(validateSizeRatio(99)).toStrictEqual(true);
-        expect(validateSizeRatio(100)).toStrictEqual(true);
-        expect(validateSizeRatio(101)).toStrictEqual(true);
+        assert.strictEqual(validateSizeRatio(0), false, "0");
+        assert.strictEqual(validateSizeRatio(1), true, "1");
+        assert.strictEqual(validateSizeRatio(2), true, "2");
+        assert.strictEqual(validateSizeRatio(99), true, "99");
+        assert.strictEqual(validateSizeRatio(100), true, "100");
+        assert.strictEqual(validateSizeRatio(101), true, "101");
     });
 
     it('textDecoration clean', () => {
-        expect(validateTextDecoration('none')).toStrictEqual(true);
-        expect(validateTextDecoration('bold')).toStrictEqual(true);
-        expect(validateTextDecoration('italic')).toStrictEqual(true);
-        expect(validateTextDecoration('underline')).toStrictEqual(true);
-        expect(validateTextDecoration('None')).toStrictEqual(true);
-        expect(validateTextDecoration('Bold')).toStrictEqual(true);
-        expect(validateTextDecoration('Italic')).toStrictEqual(true);
-        expect(validateTextDecoration('Underline')).toStrictEqual(true);
-        expect(validateTextDecoration('')).toStrictEqual(false);
-        expect(validateTextDecoration('sldkfj')).toStrictEqual(false);
+        assert.strictEqual(validateTextDecoration('none'), true, 'none');
+        assert.strictEqual(validateTextDecoration('bold'), true, 'bold');
+        assert.strictEqual(validateTextDecoration('italic'), true, 'italic');
+        assert.strictEqual(validateTextDecoration('underline'), true, 'underline');
+        assert.strictEqual(validateTextDecoration('None'), true, 'None');
+        assert.strictEqual(validateTextDecoration('Bold'), true, 'Bold');
+        assert.strictEqual(validateTextDecoration('Italic'), true, 'Italic');
+        assert.strictEqual(validateTextDecoration('Underline'), true, 'Underline');
+        assert.strictEqual(validateTextDecoration(''), false, "''");
+        assert.strictEqual(validateTextDecoration('sldkfj'), false, 'sldkfj');
     });
 
     it('fontSize clean', () => {
-        expect(validateFontSize('big')).toStrictEqual(true);
-        expect(validateFontSize('medium')).toStrictEqual(true);
-        expect(validateFontSize('small')).toStrictEqual(true);
-        expect(validateFontSize('12px')).toStrictEqual(true);
-        expect(validateFontSize('')).toStrictEqual(false);
-        expect(validateFontSize('lsjadkf')).toStrictEqual(false);
-        expect(validateFontSize('Big')).toStrictEqual(true);
-        expect(validateFontSize('Medium')).toStrictEqual(true);
-        expect(validateFontSize('Small')).toStrictEqual(true);
+        assert.strictEqual(validateFontSize('big'), true, 'big');
+        assert.strictEqual(validateFontSize('medium'), true, 'medium');
+        assert.strictEqual(validateFontSize('small'), true, 'small');
+        assert.strictEqual(validateFontSize('12px'), true, '12px');
+        assert.strictEqual(validateFontSize(''), false, "''");
+        assert.strictEqual(validateFontSize('lsjadkf'), false, 'lsjadkf');
+        assert.strictEqual(validateFontSize('Big'), true, 'Big');
+        assert.strictEqual(validateFontSize('Medium'), true, 'Medium');
+        assert.strictEqual(validateFontSize('Small'), true, 'Small');
     });
 });
 
@@ -67,13 +68,13 @@ describe('validation.js object validation functions, clean tests', () => {
             decoration: 'none',
             fontSize: 'big'
         };
-        expect(validateContainer(container)).toStrictEqual(true);
+        assert.strictEqual(validateContainer(container), true);
         // make sure container was not modified
-        expect(container.type).toStrictEqual('container');
-        expect(container.direction).toStrictEqual('horizontal');
-        expect(container.sizeRatio).toStrictEqual(42);
-        expect(container.decoration).toStrictEqual('none');
-        expect(container.fontSize).toStrictEqual('big');
+        assert.strictEqual(container.type, 'container');
+        assert.strictEqual(container.direction, 'horizontal');
+        assert.strictEqual(container.sizeRatio, 42);
+        assert.strictEqual(container.decoration, 'none');
+        assert.strictEqual(container.fontSize, 'big');
     });
 });
 
