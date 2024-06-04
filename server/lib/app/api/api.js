@@ -29,4 +29,9 @@ router.use((req, res) => {
     res.json({ 'message':'Not found.' });
 });
 
+// Error handling
+router.use((err, req, res, next) => {
+
+});
+
 export default router;

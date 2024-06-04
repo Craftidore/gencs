@@ -2,8 +2,7 @@ import { createServer } from 'http';
 import app from './app/index.js';
 import { httpPort } from './config.js';
 import logger from './logger.js';
-// import { connect } from './db.js';
-const connect = async () => { }
+import { connect } from './db.js';
 
 const server = createServer(app);
 
