@@ -7,7 +7,7 @@ export async function characterid(req, res, next, id) {
     next();
 }
 
-export function templateid(req, res, next, id) {
+export async function templateid(req, res, next, id) {
     const template = await Template.findById(id);
     res.locals.template = template;
     next();

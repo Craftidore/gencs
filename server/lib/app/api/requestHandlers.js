@@ -11,7 +11,7 @@ export const get = {
         res.status(200);
         res.json(res.locals.character);
     },
-    getManyTemplates: (req, res) => {
+    getManyTemplates: async (req, res) => {
         const templates = await Template.find({});
         res.status(200);
         res.json(templates);
@@ -24,13 +24,13 @@ export const get = {
 export const post = {
     createCharacter: async (req, res) => {
         const char = new Character({
-            name:res.body.name
+            name:req.body.name
         });
         await char.save();
         res.status(200);
         res.json(char);
     },
-    updateCharacter: (req, res) => {
+    updateCharacter: async (req, res) => {
         const char = res.locals.character;
         res.status(200);
         char.name = res.body.name;
@@ -38,14 +38,14 @@ export const post = {
         await char.save();
         res.json(char);
     },
-    createTemplate: (req, res) => {
+    createTemplate: async (req, res) => {
         const template = await new Template({
             name:res.body.name
         });
         res.status(200);
         res.json(template);
     },
-    updateCharacter: (req, res) => {
+    updateCharacter: async (req, res) => {
         const template = res.locals.template;
         res.status(200);
         template.name = res.body.name;
@@ -57,16 +57,16 @@ export const put = {
 
 };
 export const del = {
-    removeCharacter: (req, res) => {
+    removeCharacter: async (req, res) => {
         const character = res.locals.character;
         res.status(200);
-        Character.deleteOne({ _id:character._id }); // NOTE: I think there was a cleaner way of doing this...
+        await Character.deleteOne({ _id:character._id }); // NOTE: I think there was a cleaner way of doing this...
         res.json(character);
     },
-    removeTemplate: (req, res) => {
+    removeTemplate: async (req, res) => {
         const template = res.locals.template;
         res.status(200);
-        Template.deleteOne({ _id:template._id });
+        await Template.deleteOne({ _id:template._id });
         res.json(template);
     }
 };
