@@ -33,22 +33,25 @@ export const post = {
     updateCharacter: async (req, res) => {
         const char = res.locals.character;
         res.status(200);
-        char.name = res.body.name;
+        char.name = req.body.name;
         // NOTE: Incomplete
         await char.save();
         res.json(char);
     },
     createTemplate: async (req, res) => {
         const template = await new Template({
-            name:res.body.name
+            name:req.body.name,
+            summary:req.body.summary,
+            templateData:req.body.templateData,
         });
+        await template.save();
         res.status(200);
         res.json(template);
     },
-    updateCharacter: async (req, res) => {
+    updateTemplate: async (req, res) => {
         const template = res.locals.template;
         res.status(200);
-        template.name = res.body.name;
+        template.name = req.body.name;
         await template.save();
         res.json(template);
     }

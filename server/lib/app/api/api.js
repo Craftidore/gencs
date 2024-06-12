@@ -24,6 +24,18 @@ router.route('/characters/:characterid')
     .delete(del.removeCharacter)
     .all(invalidRequestMethod);
 
+router.route('/templates')
+    .get(get.getManyTemplates)
+    .post(post.createTemplate)
+    .all(invalidRequestMethod);
+
+
+router.route('/templates/:templateid')
+    .get(get.getSingleTemplate)
+    .post(post.updateTemplate)
+    .delete(del.removeTemplate)
+    .all(invalidRequestMethod);
+
 
 router.use((req, res) => {
     res.status(404);
