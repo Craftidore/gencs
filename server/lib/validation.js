@@ -1,7 +1,7 @@
 const maxSizeRatio = 101;
 const minSizeRatio = 1;
 
-export function validateDirection(direction) {
+function validateDirection(direction) {
 	if (
 		typeof direction === "string" &&
 		(direction === "horizontal" || direction === "vertical")
@@ -12,7 +12,7 @@ export function validateDirection(direction) {
 	}
 }
 
-export function validateSizeRatio(sizeRatio) {
+function validateSizeRatio(sizeRatio) {
 	if (
 		typeof sizeRatio === "number" &&
 		maxSizeRatio >= sizeRatio &&
@@ -24,7 +24,7 @@ export function validateSizeRatio(sizeRatio) {
 	}
 }
 
-export function validateTextDecoration(decoration) {
+function validateTextDecoration(decoration) {
 	if (
 		typeof decoration === "string" &&
 		(decoration.toLowerCase() === "bold" ||
@@ -38,7 +38,7 @@ export function validateTextDecoration(decoration) {
 	}
 }
 
-export function validateFontSize(fontSize) {
+function validateFontSize(fontSize) {
 	if (typeof fontSize === "string") {
 		switch (fontSize.toLowerCase()) {
 			case "big":
@@ -55,7 +55,7 @@ export function validateFontSize(fontSize) {
 
 //added check for default value for TextInput
 
-export function validateTextDefaultValue(defaultValue) {
+function validateTextDefaultValue(defaultValue) {
 	if (defaultValue === null) {
 		defaultValue = "";
 	}
@@ -68,7 +68,7 @@ export function validateTextDefaultValue(defaultValue) {
 
 //check for default value for NumberInput
 
-export function validateNumberDefaultValue(defaultValue) {
+function validateNumberDefaultValue(defaultValue) {
 	if (typeof defaultValue === "number") {
 		return true;
 	} else {
@@ -76,7 +76,7 @@ export function validateNumberDefaultValue(defaultValue) {
 	}
 }
 
-export function validateAllowFloat(allowFloat) {
+function validateAllowFloat(allowFloat) {
 	if (typeof allowFloat === "boolean") {
 		return true;
 	} else {
