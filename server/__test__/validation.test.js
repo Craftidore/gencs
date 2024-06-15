@@ -1,12 +1,10 @@
 // import config from '../lib/config.js';
 import assert from 'assert';
 import {
-    validateDirection,
-    validateSizeRatio,
-    validateTextDecoration,
-    validateFontSize,
+    _testing,
     validateContainer,
-} from '../validation.js';
+} from '../lib/validation.js';
+const { validateDirection, validateSizeRatio, validateTextDecoration, validateFontSize } = _testing;
 
 describe('validation.js helper functions, clean tests', () => {
     it('direction clean', () => {

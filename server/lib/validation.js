@@ -153,3 +153,13 @@ export function validateNumberInput(numberInput) {
 
 	return validNumberDefaultValue && validFontSize;
 }
+
+export const _testing = {
+    validateDirection,
+    validateSizeRatio,
+    validateTextDecoration,
+    validateFontSize,
+    validateTextDefaultValue,
+    validateNumberDefaultValue,
+    validateAllowFloat,
+};
