@@ -1,8 +1,15 @@
 // import config from '../lib/config.js';
-import assert from 'assert';
+import assert from 'node:assert/strict';
 import {
     _testing,
     validateContainer,
+    validateLabel,
+    validateTextInput,
+    validateTextboxInput,
+    validateNumberInput,
+    // validateChoiceInput,
+    // validateRadioInput,
+    // validateCheckboxInput
 } from '../lib/validation.js';
 const { validateDirection, validateSizeRatio, validateTextDecoration, validateFontSize } = _testing;
 
@@ -66,13 +73,91 @@ describe('validation.js object validation functions, clean tests', () => {
             decoration: 'none',
             fontSize: 'big'
         };
+        const refContainer = { ...container };
         assert.strictEqual(validateContainer(container), true);
-        // make sure container was not modified
-        assert.strictEqual(container.type, 'container');
-        assert.strictEqual(container.direction, 'horizontal');
-        assert.strictEqual(container.sizeRatio, 42);
-        assert.strictEqual(container.decoration, 'none');
-        assert.strictEqual(container.fontSize, 'big');
+        assert.deepStrictEqual(refContainer, container);
     });
+    it('label1 clean', () => {
+        const label = {
+            type: 'label',
+            decoration: 'bold',
+            fontSize: 'big',
+            sizeRatio: 1
+        };
+        const refLabel = { ...label };
+        assert.strictEqual(validateLabel(label), true, 'label object is valid');
+        assert.deepStrictEqual(refLabel, label, 'label object remains unchanged');
+    });
+    it('textInput clean', () => {
+        const textInput = {
+            type: 'text-input',
+            defaultValue: '',
+            fontSize: 'big',
+            sizeRatio: 1
+        };
+        const refTextInput = { ...textInput };
+        assert.strictEqual(validateTextInput(textInput), true, 'textInput object is valid');
+        assert.deepStrictEqual(refTextInput, textInput, 'textInput object remains unchanged');
+    });
+    it('textboxInput clean', () => {
+        const textboxInput = {
+            type: 'textbox-input',
+            defaultValue: '',
+            fontSize: 'big',
+            sizeRatio: 2
+        };
+        const refTextboxInput = { ...textboxInput };
+        assert.strictEqual(validateTextboxInput(textboxInput), true, 'textboxInput object is valid');
+        assert.deepStrictEqual(refTextboxInput, textboxInput, 'textboxInput object remains unchanged');
+    });
+    it('numberInput clean', () => {
+        const numberInput = {
+            type: 'number-input',
+            allowFloat: true,
+            defaultValue: 5.213,
+            fontSize: 'small',
+        };
+        const refNumberInput = { ...numberInput };
+        assert.strictEqual(validateNumberInput(numberInput), true, 'numberInput object is valid');
+        assert.deepStrictEqual(refNumberInput, numberInput, true, 'numberInput object remains unchanged');
+    });
+    // it('choiceInput clean', () => {
+    //     const choiceInput = {
+    //         type: 'choice-input',
+    //         fontSize: 'medium',
+    //         choices: ['Example 1', 'Example 2'],
+    //         defaultValue: -1,
+    //         sizeRatio: 2,
+    //     };
+    //     const refChoiceInput = { ...choiceInput };
+    //     assert.strictEqual(validateChoiceInput(choiceInput), true, 'choiceInput object is valid');
+    //     assert.deepStrictEqual(refChoiceInput, choiceInput, 'choiceInput object remains unchanged');
+    // });
+    // it('radioInput clean', () => {
+    //     const radioInput = {
+    //         type: 'radio-input', 
+    //         defaultValue: 'example one', // Why is this a string, not an index...
+    //         fontSize:'small',
+    //         labels:['example one', 'example two'],
+    //         direction:'vertical',
+    //         sizeRatio:4,
+    //     };
+    //     const refRadioInput = { ...radioInput };
+    //     assert.strictEqual(validateRadioInput(radioInput), true, 'radioInput object is valid');
+    //     assert.deepStrictEqual(refRadioInput, radioInput, 'radioInput object remains unchanged');
+    // });
+    // it('checkboxInput clean', () => {
+    //     const checkboxInput = {
+    //         type: 'checkbox-input',
+    //         defaultValue: 'checked',
+    //         fontSize: 'small',
+    //         labels: ['example one', 'example 2'],
+    //         direction: 'horizontal',
+    //         sizeRatio: 3,
+    //     };
+    //     const refCheckboxInput = { ...checkboxInput };
+    //     assert.strictEqual(validateCheckboxInput(checkboxInput), true, 'checkboxInput object is valid');
+    //     assert.deepStrictEqual(refCheckboxInput, checkboxInput, 'checkboxInput remains unchanged');
+    // });
 });
 

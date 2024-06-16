@@ -127,7 +127,7 @@ export function validateTextInput(textInput) {
 	return validTextDefaultValue && validFontSize && validSizeRatio;
 }
 
-export function validateTextBoxInput(textBoxInput) {
+export function validateTextboxInput(textBoxInput) {
 	if (textBoxInput.type !== "textbox-input") {
 		return false;
 	}
