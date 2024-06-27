@@ -57,8 +57,8 @@ export const post = {
         const template = res.locals.template;
         res.status(200);
         template.name = req.body.name;
-        template.summary:req.body.summary;
-        template.templateData:req.body.templateData;
+        template.summary = req.body.summary;
+        template.templateData = req.body.templateData;
         await template.save();
         res.json(template);
     }
