@@ -5,8 +5,8 @@ import { IS_DEBUG } from '../../config.js';
 
 const router = express.Router();
 
-// router.param('characterid', params.characterid);
-// router.param('templateid', params.templateid);
+router.param('characterid', params.characterid);
+router.param('templateid', params.templateid);
 
 const invalidRequestMethod = (req, res) => {
     res.status(404);

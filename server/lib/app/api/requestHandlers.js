@@ -24,7 +24,10 @@ export const get = {
 export const post = {
     createCharacter: async (req, res) => {
         const char = new Character({
-            name:req.body.name
+            name:req.body.name,
+            summary:req.body.summary,
+            characterData:req.body.characterData,
+            template:req.body.template,
         });
         await char.save();
         res.status(200);
@@ -34,7 +37,9 @@ export const post = {
         const char = res.locals.character;
         res.status(200);
         char.name = req.body.name;
-        // NOTE: Incomplete
+        char.summary = req.body.summary;
+        char.characterData = req.body.characterData;
+        char.template = req.body.template;
         await char.save();
         res.json(char);
     },
@@ -52,6 +57,8 @@ export const post = {
         const template = res.locals.template;
         res.status(200);
         template.name = req.body.name;
+        template.summary = req.body.summary;
+        template.templateData = req.body.templateData;
         await template.save();
         res.json(template);
     }
