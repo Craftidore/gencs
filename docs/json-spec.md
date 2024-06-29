@@ -12,6 +12,7 @@ Everything has an id
     "type":"container",
     "direction":String, // "vertical" or "horizontal"
     "size_ratio":Number, // not-negative
+    "children":[Object],
     "id":String // some hex uuid
 }
 ```
