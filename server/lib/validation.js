@@ -93,11 +93,9 @@ export function validateContainer(container) {
 
 	const validDirection = validateDirection(container.direction);
 	const validSizeRatio = validateSizeRatio(container.sizeRatio);
-	const validTextDecoration = validateTextDecoration(container.decoration);
-	const validFontSize = validateFontSize(container.fontSize);
 
 	return (
-		validDirection && validSizeRatio && validTextDecoration && validFontSize
+		validDirection && validSizeRatio
 	);
 }
 

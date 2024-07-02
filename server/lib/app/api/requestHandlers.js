@@ -43,15 +43,20 @@ export const post = {
         await char.save();
         res.json(char);
     },
-    createTemplate: async (req, res) => {
-        const template = await new Template({
-            name:req.body.name,
-            summary:req.body.summary,
-            templateData:req.body.templateData,
-        });
-        await template.save();
-        res.status(200);
-        res.json(template);
+    createTemplate: async (req, res, next) => {
+        try {
+            const template = await new Template({
+                name:req.body.name,
+                summary:req.body.summary,
+                templateData:req.body.templateData,
+            });
+            await template.save();
+            res.status(200);
+            res.json(template);
+        }
+        catch (e) {
+            next(e);
+        }
     },
     updateTemplate: async (req, res) => {
         const template = res.locals.template;
