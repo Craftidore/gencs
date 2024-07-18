@@ -46,7 +46,7 @@ router.use((req, res) => {
 router.use((err, req, res, next) => {
     res.status(500);
     if (IS_DEBUG) {
-        res.json({ 'message': err.what(), stack: err.stack } );
+        res.json({ 'message': err.name, 'stack':new Error().stack } );
     }
     else {
         res.json({ 'message': 'Internal server error' });
