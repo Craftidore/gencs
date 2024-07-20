@@ -37,6 +37,20 @@ const characterSchema = new mongoose.Schema({
         }
 });
 
+characterSchema.pre('save', function (next) {
+    const character = this;
+    let isValid = true;
+    if (isValid) {
+        next();
+    }
+    else {
+        let err = new Error('Invalid Character');
+        err.name = 'characterDataError';
+        next(err);
+    }
+});
+
+
 const Character = mongoose.model('Character', characterSchema);
 
 export default Character;

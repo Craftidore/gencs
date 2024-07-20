@@ -44,12 +44,27 @@ router.use((req, res) => {
 
 // Error handling
 router.use((err, req, res, next) => {
-    res.status(500);
-    if (IS_DEBUG) {
-        res.json({ 'message': err.name, 'stack':new Error().stack } );
+    if (err.name === 'ValidationError') {
+        res.status(400);
+        res.json({ 'message': 'Data invalid' });
     }
+    else if (err.name === 'templateDataError') {
+        res.status(400);
+        res.json({ 'message': 'templateData invalid'});
+    }
+    else if (err.name === 'characterDataError') {
+        res.status(400);
+        res.json({ 'message': 'characterData invalid' });
+    }
+    // WARN: Not sure if character template id not existing in db is being caught
     else {
-        res.json({ 'message': 'Internal server error' });
+        res.status(500);
+        if (IS_DEBUG) {
+            res.json({ 'message': err.name, 'stack':new Error().stack } );
+        }
+        else {
+            res.json({ 'message': 'Internal server error' });
+        }
     }
 });
 

@@ -33,6 +33,19 @@ const templateSchema = new mongoose.Schema(
 	}
 );
 
+templateSchema.pre('save', function (next) {
+    const template = this;
+    let isValid = true;
+    if (isValid) {
+        next();
+    }
+    else {
+        let err = new Error('Invalid Template');
+        err.name = 'templateDataError';
+        next(err);
+    }
+});
+
 const Template = mongoose.model("Template", templateSchema);
 
 export default Template;
