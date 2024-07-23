@@ -8,7 +8,7 @@
   },
   "type": "module",
   "scripts": {
-    "test": "LOG_LEVEL=silent npx mocha __test__/*",
+    "test": "LOG_LEVEL=silent npx mocha __test__/*.js",
     "watch": "SERVER_IS_DEBUG=true nodemon -i sessions .",
     "start": "node lib/server.js",
     "start-db": "mongod --dbpath ../database/"
