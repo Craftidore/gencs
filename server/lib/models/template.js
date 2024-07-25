@@ -36,16 +36,54 @@ const templateSchema = new mongoose.Schema(
 templateSchema.pre('save', function (next) {
     const template = this;
     let isValid = true;
-    if (isValid) {
-        next();
+    if (!isValid) {
+        return
     }
-    else {
-        let err = new Error('Invalid Template');
-        err.name = 'templateDataError';
-        next(err);
+
+	const validateRecurse = (obj) => {
+        if (!isValid) {
+            return;
+        }
+        switch (obj.type) {
+            case 'container':
+                isValid &= validateContainer(obj);
+                for (const child of obj.children) {
+                    validateRecurse(child);
+                }
+                break;
+            case 'label':
+                isValid &= validateLabel(obj);
+                break;
+            case 'text-input':
+                isValid &= validateTextInput(obj);
+                break;
+            case 'textbox-input':
+                isValid &= validateTextboxInput(obj);
+                break;
+            case 'number-input':
+                isValid &= validateNumberInput(obj);
+                break;
+            case 'choice-input':
+                isValid &= true; // validateChoiceInput(obj);
+                break;
+            case 'radio-input':
+                isValid &= true; // validateRadioInput(obj);
+                break;
+            case 'checkbox-input':
+                isValid &= true; // validateCheckboxInput(obj);
+                break;
+            default:
+                isValid &= false;
+                break;
+        }
+    };
+    validateRecurse(template.templateData);
+    if (!isValid) {
+        next(new Error('Invalid templateData'));
     }
+    next();
 });
 
-const Template = mongoose.model("Template", templateSchema);
+const Template = mongoose.model('Template', templateSchema);
 
 export default Template;
