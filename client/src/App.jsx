@@ -1,12 +1,13 @@
-import './App.css'
+import "./App.css";
+import { RouterProvider } from "react-router-dom";
+import router from "./Routes";
 
 function App() {
-    return (
-        <>
-            <h1>Generic Character Sheet Builder</h1>
-            <div>This project is a work-in-progress.</div>
-        </>
-    )
+	return (
+		<>
+			<RouterProvider router={router} />
+		</>
+	);
 }
 
-export default App
+export default App;
