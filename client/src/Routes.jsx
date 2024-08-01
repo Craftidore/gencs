@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import Characters from "./components/Characters";
@@ -13,6 +13,9 @@ const router = createBrowserRouter([
 		element: (
 			<>
 				<NavBar />
+                <main>
+                    <Outlet />
+                </main>
 				<Footer />
 			</>
 		),
@@ -39,20 +42,6 @@ const router = createBrowserRouter([
 			},
 		],
 	},
-	// {
-	// 	path: "/",
-	// 	element: <Footer />,
-	// 	children: [
-	// 		{
-	// 			path: "/about",
-	// 			element: <About />,
-	// 		},
-	// 		{
-	// 			path: "/privacy",
-	// 			element: <Privacy />,
-	// 		},
-	// 	],
-	// },
 ]);
 
 export default router;

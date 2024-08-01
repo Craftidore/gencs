@@ -1,0 +1,13 @@
+.navbar {
+    flex: 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.navbar > .navbar-item {
+    padding: 10px;
+    margin: 10px;
+    width: fit-content;
+}
