@@ -1,5 +1,5 @@
 import Character from "../../models/character.js";
-import Template from "../../models/character.js";
+import Template from "../../models/template.js";
 
 export async function characterid(req, res, next, id) {
 	try {
