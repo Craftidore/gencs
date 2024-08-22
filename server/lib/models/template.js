@@ -1,4 +1,12 @@
 import mongoose from "mongoose";
+mongoose.set('debug', true);
+import {
+    validateContainer,
+    validateLabel,
+    validateTextInput,
+    validateTextboxInput,
+    validateNumberInput
+} from '../validation.js';
 
 const templateSchema = new mongoose.Schema(
 	{
@@ -24,7 +32,7 @@ const templateSchema = new mongoose.Schema(
 	{
 		toJSON: {
 			transform: function (doc, obj) {
-				obj.id = obj._id;
+				obj.id = obj._id.toString();
 				delete obj._id;
 				delete obj.__v;
 				return obj;
