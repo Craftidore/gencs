@@ -15,9 +15,9 @@ const router = createBrowserRouter([
 		element: (
 			<>
 				<NavBar />
-                <main>
-                    <Outlet />
-                </main>
+				<main>
+					<Outlet />
+				</main>
 				<Footer />
 			</>
 		),
@@ -30,16 +30,16 @@ const router = createBrowserRouter([
 				path: "/characters",
 				element: <Characters />,
 			},
-            {
-                path: "/characters/:charid",
-                element: <Character />
-            },
+			{
+				path: "/characters/:charid",
+				element: <Character />,
+			},
 			{
 				path: "/templates",
 				element: <Templates />,
 			},
 			{
-                path: "/templates/:templateid",
+				path: "/templates/:templateid",
 				element: <Template />,
 			},
 			{

@@ -1,7 +1,5 @@
 .footer {
-    flex: 0;
     padding: 10px;
-    display: block;
     width: 100%;
 }
 .footer-item {

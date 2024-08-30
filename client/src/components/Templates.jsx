@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../api.js";
+import TemplateSideBar from "./TemplateSideBar.jsx";
 
 export default function Templates() {
 	const [templates, setTemplates] = useState(undefined);
@@ -34,6 +35,7 @@ export default function Templates() {
 
 	return (
 		<div>
+			<TemplateSideBar></TemplateSideBar>
 			<h1>Templates</h1>
 			<p>This page is incomplete.</p>
 			{templates !== undefined ? (
