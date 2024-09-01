@@ -1,9 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./Templates.css";
+import EditIcon from "@rsuite/icons/Edit";
 import PlusIcon from "@rsuite/icons/Plus";
-import MinusIcon from "@rsuite/icons/Minus";
-import ArrowLeftLineIcon from "@rsuite/icons/ArrowLeftLine";
-import ArrowRightLineIcon from "@rsuite/icons/ArrowRightLine";
+import TrashIcon from '@rsuite/icons/Trash';
 import { IconButton } from "rsuite";
 
 export default function TemplateSideBar() {
@@ -51,9 +50,15 @@ export default function TemplateSideBar() {
 	);
 }
 
-function Tree({ treeData }) {
+function Tree({ treeData, items }) {
+	//if leaf doesnt have children, return to avoid errors
+	if (!treeData) {
+		return;
+	}
+
 	return (
 		<ul>
+			{items}
 			{treeData.map((node, index) => (
 				<TreeNode node={node} key={index} />
 			))}
@@ -63,8 +68,24 @@ function Tree({ treeData }) {
 
 function TreeNode({ node }) {
 	const { children, name } = node;
-	const [showChildren, setShowChildren] = useState(false);
 	const [display, setDisplay] = useState(false);
+	const [editing, setEditing] = useState(false);
+	const [items, setItems] = useState([]);
+
+	const handleEdit = () => {
+		setEditing(!editing);
+	};
+
+	const addItem = () => {
+		const newItem = React.createElement("input");
+		setItems((items) => [...items, newItem]);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setEditing(!editing);
+        console.log(editing, 'editing should change')
+	};
 
 	const showIcons = (e) => {
 		e.preventDefault();
@@ -75,26 +96,27 @@ function TreeNode({ node }) {
 		e.preventDefault();
 		setDisplay(!display);
 	};
-	const handleClick = () => {
-		if (!children) {
-			return;
-		}
-		setShowChildren(!showChildren);
-	};
 	return (
 		<>
 			<div
-				onClick={handleClick}
 				onMouseEnter={(e) => {
 					showIcons(e);
 				}}
 				onMouseLeave={(e) => {
 					hideIcons(e);
 				}}
-				style={{ marginBottom: "10px" }}
+				style={{ display: "flex", margin: "10px" }}
 			>
-				<span>{name}</span>
-				{display && <Footer />}
+				{editing ? (
+					<form onSubmit={handleSubmit}>
+						<input type="text" placeholder="test"/>
+					</form>
+				) : (
+					<span>{name}</span>
+				)}
+				{display && (
+					<IconBar handleEdit={handleEdit} addItem={addItem} />
+				)}
 			</div>
 			<div>
 				<ul
@@ -103,24 +125,19 @@ function TreeNode({ node }) {
 						borderLeft: "1px solid black",
 					}}
 				>
-					{showChildren && <Tree treeData={children} />}
+					<Tree treeData={children} items={items} />
 				</ul>
 			</div>
 		</>
 	);
 }
 
-function Footer() {
+function IconBar({ handleEdit, addItem }) {
 	return (
 		<>
-			<IconButton icon={<PlusIcon />} />
-			<IconButton icon={<MinusIcon />} />
-			<IconButton
-				icon={<ArrowLeftLineIcon />}
-				appearance="primary"
-				size="lg"
-			/>
-			<IconButton icon={<ArrowRightLineIcon />} size="lg" />
+			<IconButton onClick={handleEdit} icon={<EditIcon />} />
+			<IconButton onClick={addItem} icon={<PlusIcon />} />
+			<IconButton icon={<TrashIcon />} />
 		</>
 	);
 }
