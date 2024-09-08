@@ -51,6 +51,7 @@ export default function TemplateSideBar() {
 }
 
 function Tree({ treeData, items }) {
+	console.log(treeData, 'treedata')
 	//if leaf doesnt have children, return to avoid errors
 	if (!treeData) {
 		return;
@@ -60,17 +61,20 @@ function Tree({ treeData, items }) {
 		<ul>
 			{items}
 			{treeData.map((node, index) => (
-				<TreeNode node={node} key={index} />
+				<TreeNode node={node} key={index} treeData={treeData}/>
 			))}
 		</ul>
 	);
 }
 
-function TreeNode({ node }) {
+function TreeNode({ treeData, node }) {
 	const { children, name } = node;
 	const [display, setDisplay] = useState(false);
 	const [editing, setEditing] = useState(false);
 	const [items, setItems] = useState([]);
+	const [formData, setFormData] = useState({treeData});
+
+	console.log(formData, 'formdata')
 
 	const handleEdit = () => {
 		setEditing(!editing);
@@ -81,35 +85,31 @@ function TreeNode({ node }) {
 		setItems((items) => [...items, newItem]);
 	};
 
+	const handleChange = (e) => {
+		setFormData(e.target.value)
+	}
+
 	const handleSubmit = (e) => {
+		// console.log(formData, 'formdata handlesubmit')
+		// console.log(setFormData(prevFormData => prevFormData, formData), 'prev form data')
 		e.preventDefault();
 		setEditing(!editing);
-        console.log(editing, 'editing should change')
 	};
-
-	const showIcons = (e) => {
-		e.preventDefault();
-		setDisplay(!display);
-	};
-
-	const hideIcons = (e) => {
-		e.preventDefault();
-		setDisplay(!display);
-	};
+	
 	return (
 		<>
 			<div
-				onMouseEnter={(e) => {
-					showIcons(e);
+				onMouseEnter={() => {
+					setDisplay(true)
 				}}
-				onMouseLeave={(e) => {
-					hideIcons(e);
+				onMouseLeave={() => {
+					setDisplay(false)
 				}}
 				style={{ display: "flex", margin: "10px" }}
 			>
 				{editing ? (
-					<form onSubmit={handleSubmit}>
-						<input type="text" placeholder="test"/>
+					<form onSubmit={(e) => {handleSubmit(e)}}>
+						<input type="text" onChange={handleChange}/>
 					</form>
 				) : (
 					<span>{name}</span>
