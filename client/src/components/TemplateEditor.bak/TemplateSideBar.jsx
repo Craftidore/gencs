@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Templates.css";
+import "./TemplateEditor.css";
 import EditIcon from "@rsuite/icons/Edit";
 import PlusIcon from "@rsuite/icons/Plus";
 import TrashIcon from '@rsuite/icons/Trash';
@@ -10,32 +10,39 @@ export default function TemplateSideBar() {
 		{
 			type: "container",
 			name: "Template Name",
+            id: 'a1',
 			children: [
 				{
 					type: "container",
 					name: "Name Container",
+                    id: 'b1',
 					children: [
 						{
 							type: "label",
 							name: "Name Label",
+                            id: 'c1',
 						},
 						{
 							type: "input",
 							name: "Name Input",
+                            id: 'c2',
 						},
 					],
 				},
 				{
 					type: "container",
 					name: "Level Container",
+                    id: 'b2',
 					children: [
 						{
 							type: "label",
 							name: "Level Label",
+                            id: 'd1',
 						},
 						{
 							type: "input",
 							name: "Level Input",
+                            id: 'd2',
 						},
 					],
 				},
@@ -51,8 +58,8 @@ export default function TemplateSideBar() {
 }
 
 function Tree({ treeData, items }) {
-	console.log(treeData, 'treedata')
-	//if leaf doesnt have children, return to avoid errors
+	// console.log(treeData, 'treedata')
+	// if leaf doesnt have children, return to avoid errors
 	if (!treeData) {
 		return;
 	}
@@ -72,7 +79,7 @@ function TreeNode({ treeData, node }) {
 	const [display, setDisplay] = useState(false);
 	const [editing, setEditing] = useState(false);
 	const [items, setItems] = useState([]);
-	const [formData, setFormData] = useState({treeData});
+	const [formData, setFormData] = useState(node.name);
 
 	console.log(formData, 'formdata')
 
@@ -90,14 +97,12 @@ function TreeNode({ treeData, node }) {
 	}
 
 	const handleSubmit = (e) => {
-		// console.log(formData, 'formdata handlesubmit')
-		// console.log(setFormData(prevFormData => prevFormData, formData), 'prev form data')
 		e.preventDefault();
+        node.name = formData;
 		setEditing(!editing);
 	};
 	
-	return (
-		<>
+	return <>
 			<div
 				onMouseEnter={() => {
 					setDisplay(true)
@@ -128,8 +133,7 @@ function TreeNode({ treeData, node }) {
 					<Tree treeData={children} items={items} />
 				</ul>
 			</div>
-		</>
-	);
+		</>;
 }
 
 function IconBar({ handleEdit, addItem }) {
