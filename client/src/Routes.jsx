@@ -3,8 +3,8 @@ import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import Characters from "./components/Characters";
 import Character from "./components/Character";
-import Templates from "./components/Templates";
-import Template from "./components/Template";
+import Templates from "./components/Template";
+import TemplateEditor from "./components/TemplateEditor/TemplateEditor.jsx";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
 import Footer from "./components/Footer";
@@ -15,9 +15,9 @@ const router = createBrowserRouter([
 		element: (
 			<>
 				<NavBar />
-                <main>
-                    <Outlet />
-                </main>
+				<main>
+					<Outlet />
+				</main>
 				<Footer />
 			</>
 		),
@@ -30,17 +30,17 @@ const router = createBrowserRouter([
 				path: "/characters",
 				element: <Characters />,
 			},
-            {
-                path: "/characters/:charid",
-                element: <Character />
-            },
 			{
-				path: "/templates",
-				element: <Templates />,
+				path: "/characters/:charid",
+				element: <Character />,
 			},
 			{
-                path: "/templates/:templateid",
-				element: <Template />,
+				path: "/templates",
+				element: <TemplateEditor/>, // FIX: Shouldn't be template editor; temporary
+			},
+			{
+				path: "/templates/:templateid",
+				element: <TemplateEditor />,
 			},
 			{
 				path: "/about",

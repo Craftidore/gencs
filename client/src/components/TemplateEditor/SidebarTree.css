@@ -1,0 +1,14 @@
+.sidebar-tree ul {
+}
+.sidebar-tree .sidebar-tree-node {
+    list-style-type: none;
+    padding: 0; /* overridden by individual sidebar level */
+    margin: 5px;
+}
+
+.sidebar-tree-node > .node-name {
+    margin: 0px;
+    /* border: solid black 3px; */
+    /* border-radius: 5px; */
+    padding: 3px;
+}

@@ -1,9 +1,12 @@
 import { test } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import Characters from "../components/Characters";
+import { render } from "@testing-library/react";
 
-test("Characters Component Renders", () => {
-	<MemoryRouter>
-		<Characters></Characters>
-	</MemoryRouter>;
+test("NavBar Component", () => {
+	render(
+		<MemoryRouter>
+			<Characters></Characters>
+		</MemoryRouter>
+	);
 });
