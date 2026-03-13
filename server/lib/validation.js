@@ -25,6 +25,8 @@ function validateSizeRatio(sizeRatio) {
 }
 
 function validateTextDecoration(decoration) {
+    console.log(decoration);
+    console.log(decoration.toLowerCase() === "none")
 	if (
 		typeof decoration === "string" &&
 		(decoration.toLowerCase() === "bold" ||
@@ -104,7 +106,7 @@ export function validateLabel(label) {
 		return false;
 	}
 
-	const validTextDecoration = validateTextDecoration(label.decoration);
+	const validTextDecoration = validateTextDecoration(label.textDecoration);
 	const validFontSize = validateFontSize(label.fontSize);
 	const validSizeRatio = validateSizeRatio(label.sizeRatio);
 
@@ -122,6 +124,12 @@ export function validateTextInput(textInput) {
 	const validFontSize = validateFontSize(textInput.fontSize);
 	const validSizeRatio = validateSizeRatio(textInput.sizeRatio);
 
+	console.log("validTextDefaultValue");
+	console.log(validTextDefaultValue);
+    console.log("validFontSize");
+    console.log(validFontSize);
+    console.log("validSizeRatio;");
+    console.log(validSizeRatio);
 	return validTextDefaultValue && validFontSize && validSizeRatio;
 }
 

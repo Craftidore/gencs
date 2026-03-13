@@ -86,6 +86,7 @@ router.use((err, req, res, next) => {
     // WARN: Not sure if character template id not existing in db is being caught
     else {
         res.status(500);
+        logger.error({ 'message': err.name, 'stack':new Error().stack })
         if (IS_DEBUG) {
             res.json({ 'message': err.name, 'stack':new Error().stack } );
         }

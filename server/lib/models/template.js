@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import logger from "../logger.js"
 mongoose.set('debug', true);
 import {
     validateContainer,
@@ -52,9 +53,12 @@ templateSchema.pre('save', function (next) {
         if (!isValid) {
             return;
         }
+        logger.info(obj.type);
         switch (obj.type) {
             case 'container':
                 isValid &= validateContainer(obj);
+                logger.info('is valid container');
+                logger.info(validateContainer(obj));
                 for (const child of obj.children) {
                     validateRecurse(child);
                 }
@@ -87,7 +91,9 @@ templateSchema.pre('save', function (next) {
     };
     validateRecurse(template.templateData);
     if (!isValid) {
-        next(new Error('Invalid templateData'));
+        let err = new Error('Invalid templateData')
+        err.name = 'Invalid templateData';
+        next(err);
     }
     next();
 });

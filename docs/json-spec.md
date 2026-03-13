@@ -139,7 +139,7 @@ Font sizes note: [[#^label_spec]]
 ```js
 {
     "type":"checkbox-input",
-    "default_value":String,
+    "default_value_bool":Bool,
     "font_size":String, // see previous note on font sizes
     "labels":[String],
     "direction":String, // "vertical" or "horizontal"

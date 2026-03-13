@@ -1,4 +1,5 @@
 import express from 'express' 
+import morgan from 'morgan'
 import bodyParser from 'body-parser';
 import apiRouter from './api/api.js';
 
@@ -7,6 +8,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
+
+app.use(morgan('combined'))
 
 app.use('/api/v1', apiRouter);
 
